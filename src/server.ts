@@ -1,11 +1,16 @@
-import { fastify } from 'fastify'
 import { fastifyCors } from '@fastify/cors'
-import { validatorCompiler, serializerCompiler, ZodTypeProvider, jsonSchemaTransform } from 'fastify-type-provider-zod'
 import { fastifySwagger } from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
-import { subscribeToEventRoute } from './routes/subscribeToEventRoute'
-import { helloWorld } from './routes/helloWorld'
+import { fastify } from 'fastify'
+import {
+  type ZodTypeProvider,
+  jsonSchemaTransform,
+  serializerCompiler,
+  validatorCompiler,
+} from 'fastify-type-provider-zod'
 import { env } from './env'
+import { helloWorld } from './routes/helloWorld'
+import { subscribeToEventRoute } from './routes/subscribeToEventRoute'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -19,7 +24,7 @@ app.register(fastifySwagger, {
     info: {
       title: 'NLW Connect',
       version: '0.0.1',
-    }
+    },
   },
   transform: jsonSchemaTransform,
 })
@@ -29,7 +34,7 @@ app.register(fastifySwaggerUi, {
 })
 
 app.register(helloWorld)
-app.register(subscribeToEventRoute) 
+app.register(subscribeToEventRoute)
 
 app.listen({ port: env.PORT }).then(() => {
   console.info('HTTP server running!')

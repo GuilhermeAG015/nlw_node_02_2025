@@ -8,5 +8,8 @@
   "keywords": [],
   "author": "Guilherme Alexandre",
   "license": "ISC",
-  "description": "Nlw 2025"
+  "description": "Nlw 2025",
+  "dependencies": {
+    "fastify": "^5.2.1"
+  }
 }
